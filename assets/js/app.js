@@ -1,9 +1,12 @@
-// create a button
-document.querySelector('#myDiv').addEventListener(
-    'click', event => {
+
+
+let selArr = ['hiking', 'fishing', 'hunting', 'outdoors', 'national-parks', 'explore']
+
+selArr.forEach(
+    (sel, i) => {
         let btnElem = document.createElement('button')
-        btnElem.textContent = 'Click Me'
-        btnElem.className = 'hotdog'
-        document.querySelector('#btnDiv').append(btnElem)
-    }
-)
+        btnElem.textContent = sel
+        btnElem.className = sel
+        btnElem.id = `${sel}-${i}`
+        document.querySelector('#bttns').append(btnElem)
+    })
