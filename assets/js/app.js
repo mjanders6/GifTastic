@@ -2,7 +2,6 @@
 
 let selArr = ['hiking', 'fishing', 'hunting', 'outdoors', 'national-parks', 'explore']
 
-
 let arry = _ => {
     selArr.forEach(
         (sel, i) => {
@@ -22,44 +21,70 @@ let addBtn = () => {
     
 }
 
-let toggle = false;
+let picArry = (target) => {
+    let pic = target.className
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${pic}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=10`)
+        .then(r => r.json())
+        .then(({ data }) => {
+    
+            data.forEach(pic => {
+                let url = pic.images.fixed_height.url
+                let url_stat = pic.images.fixed_height_still.url
+                let docElem = document.createElement('div')
+    
+                docElem.innerHTML = `
+            <h3>${pic.rating}</h3>
+            <img id="gifPic" src="${url}" data-static="${url_stat}" data-animated="${url}" data-toggle="${toggle}">
+            `
+                document.querySelector('#pics').append(docElem)
+            })
+    
+        })
+
+}
+// src="${url}"
 arry()
+
+let toggle = false;
+let url, url_stat
 document.addEventListener('click', ({ target }) => {
-    document.querySelector('#pics').innerHTML = ''
+
     if (target.id === 'btn') {
+        document.querySelector('#pics').innerHTML = ''
         let pic = target.className
         fetch(`http://api.giphy.com/v1/gifs/search?q=${pic}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=10`)
             .then(r => r.json())
             .then(({ data }) => {
-
+        
                 data.forEach(pic => {
-                    const url = pic.images.fixed_height.url
-                    const url_stat = pic.images.fixed_height_still.url
+                    let url = pic.images.fixed_height.url
+                    let url_stat = pic.images.fixed_height_still.url
                     let docElem = document.createElement('div')
-
+        
                     docElem.innerHTML = `
                 <h3>${pic.rating}</h3>
-                <img id="gif" src="${url_stat}" data-still="${url_stat}" data-animated="${url}">
+                <img id="gifPic" src="${url}" data-static="${url_stat}" data-animated="${url}" data-toggle="${toggle}">
                 `
                     document.querySelector('#pics').append(docElem)
                 })
-
+        
             })
 
     } else if (target.id === 'gifPic') {
-        console.log(target);
-
         toggle = !toggle
+
         if (toggle) {
             target.setAttribute('src', target.dataset.animated)
-
+            console.log(target.dataset.animated);
+            
         } else {
             target.setAttribute('src', target.dataset.static)
-
+            
         }
 
+        
     }
-
+    
 
 
 })
