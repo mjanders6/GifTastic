@@ -1,7 +1,7 @@
 
 
 let selArr = ['hiking', 'fishing', 'hunting', 'outdoors', 'national-parks', 'explore']
-
+// function to create buttons from an array
 let arry = _ => {
     selArr.forEach(
         (sel, i) => {
@@ -12,7 +12,7 @@ let arry = _ => {
             document.querySelector('#bttns').append(btnElem)
         })
 }
-
+// function to add a button
 let addBtn = () => {
     document.querySelector('#bttns').innerHTML = ''
     selArr.push(document.querySelector('#catInput').value)
