@@ -15,7 +15,7 @@ selArr.forEach(
         document.querySelector('#pics').innerHTML = ''
     
     let animal = target.className
-    fetch(`http://api.giphy.com/v1/gifs/search?q=${animal}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=10`)
+    fetch(`http://api.giphy.com/v1/gifs/search?q=${animal}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=15`)
         .then(r => r.json())
         .then(({ data }) => {
             data.forEach(pic => {
@@ -24,8 +24,6 @@ selArr.forEach(
                 picElem.setAttribute('src', url)
                 document.querySelector('#pics').append(picElem)
             })
-            
-            
         })
         .catch(e => console.error(e))
 
