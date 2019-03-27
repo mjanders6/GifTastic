@@ -32,7 +32,7 @@ document.addEventListener('click', ({ target }) => {
         // clear the pictures
         document.querySelector('#pics').innerHTML = ''
         let pic = target.className
-        fetch(`http://api.giphy.com/v1/gifs/search?q=${pic}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=10`)
+        fetch(`https://api.giphy.com/v1/gifs/search?q=${pic}&rating=g&api_key=OeBLbdQVfVJi0hB3KDlP2IdhsDjmQetJ&limit=10`)
             .then(r => r.json())
             .then(({ data }) => {
         
